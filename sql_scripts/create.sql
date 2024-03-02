@@ -24,7 +24,7 @@ CREATE TYPE status AS ENUM (
 );
 
 CREATE TABLE project (
-    project_id SERIAL NOT NULL PRIMARY KEY,
+    project_id serial NOT NULL PRIMARY KEY,
     project_name text NOT NULL,
     project_status status NOT NULL,
     start_date date NOT NULL,
@@ -44,6 +44,7 @@ CREATE TABLE payment_policy(
     project_role text,
     special_occasion text,
     payment numeric NOT NULL,
+    status status NOT NULL,
     CONSTRAINT positive_payment CHECK(payment > 0),
     CONSTRAINT correct_policy CHECK ((position is not NULL and project_id is NULL and project_role is NULL and special_occasion is NULL) or
                                  (project_id is not NULL and position is NULL and special_occasion is NULL) or
