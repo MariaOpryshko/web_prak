@@ -70,4 +70,23 @@ CREATE TABLE assign_to_project (
     CONSTRAINT finish_after_start CHECK (finish_date IS NULL OR finish_date >= start_date)
 );
 
+CREATE FUNCTION check_position() RETURNS trigger AS $check_position$
+    BEGIN
+        IF NOT EXISTS(
+			SELECT * FROM payment_policy
+            WHERE payment_policy.position = NEW.position 
+        ) THEN
+            RAISE EXCEPTION 'This position is out of payment policies';
+        END IF;
+
+        RETURN NEW; 
+            
+    END;
+$check_mechanic$ LANGUAGE plpgsql;
+	
+CREATE TRIGGER check_position
+BEFORE INSERT OR UPDATE OF position ON employee
+FOR EACH ROW
+EXECUTE FUNCTION check_position();
+
 ALTER DATABASE employees SET search_path=data;
