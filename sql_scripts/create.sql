@@ -7,7 +7,7 @@ CREATE DATABASE employees;
 CREATE SCHEMA data;
 
 CREATE TABLE employee (
-    employee_id SERIAL NOT NULL PRIMARY KEY,
+    employee_id SERIAL NOT NULL PRIMARY KEY ON DELETE CASCADE,
     full_name text NOT NULL,
     position text NOT NULL,
     adress text,
@@ -24,7 +24,7 @@ CREATE TYPE status AS ENUM (
 );
 
 CREATE TABLE project (
-    project_id serial NOT NULL PRIMARY KEY,
+    project_id serial NOT NULL PRIMARY KEY ON DELETE CASCADE,
     project_name text NOT NULL,
     project_status status NOT NULL,
     start_date date NOT NULL,
@@ -37,7 +37,7 @@ CREATE TYPE policy_type AS ENUM (
 );
 
 CREATE TABLE payment_policy(
-    policy_id serial NOT NULL PRIMARY KEY,
+    policy_id serial NOT NULL PRIMARY KEY ON DELETE CASCADE,
     policy_type policy_type NOT NULL,
     position text,
     project_id integer REFERENCES project,
