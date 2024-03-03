@@ -83,11 +83,31 @@ CREATE FUNCTION check_position() RETURNS trigger AS $check_position$
         RETURN NEW; 
             
     END;
-$check_mechanic$ LANGUAGE plpgsql;
+$check_position$ LANGUAGE plpgsql;
+
+CREATE FUNCTION check_role() RETURNS trigger AS $check_role$
+    BEGIN
+        IF NOT EXISTS(
+			SELECT * FROM payment_policy
+            WHERE payment_policy.project_id = NEW.project_id AND  
+                  payment_policy.project_role = NEW.project_role
+        ) THEN
+            RAISE EXCEPTION 'This role is out of payment policies';
+        END IF;
+
+        RETURN NEW; 
+            
+    END;
+$check_role$ LANGUAGE plpgsql;
 	
 CREATE TRIGGER check_position
 BEFORE INSERT OR UPDATE OF position ON employee
 FOR EACH ROW
 EXECUTE FUNCTION check_position();
+
+CREATE TRIGGER check_role
+BEFORE INSERT OR UPDATE OF project_role ON assign_to_project
+FOR EACH ROW
+EXECUTE FUNCTION check_role();
 
 ALTER DATABASE employees SET search_path=data;
