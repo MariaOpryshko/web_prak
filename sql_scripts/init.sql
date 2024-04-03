@@ -1,3 +1,16 @@
+\connect employees
+
+INSERT INTO payment_policy(policy_type, position, project_id, project_role, special_occasion, status, payment)
+VALUES 
+('По должности', 'Бухгалтер', NULL, NULL, NULL, 'Активно', 30000),
+('По роли в проекте', NULL, 5, 'Связь с клиентом', NULL, 'Активно', 20000),
+('По особому случаю', NULL, NULL, NULL, 'Новый год', 'Активно', 10000),
+('По должности', 'Программист', NULL, NULL, NULL, 'Активно', 40000),
+('По должности', 'Hr-специалист', NULL, NULL, NULL, 'Активно', 40000),
+('По роли в проекте', NULL, 4, 'Адвокат', NULL, 'Активно', 50000),
+('По особому случаю', NULL, NULL, NULL, 'Премия', 'Активно', 15000),
+('По должности', 'Менеджер', NULL, NULL, NULL, 'Активно', 40000),
+('По роли в проекте', NULL, 1, 'Старший программист', NULL, 'Активно', 25000);
 
 INSERT INTO employee(full_name, position, adress, date_of_birth, education, education_degree, phone_number, work_experience)
 VALUES
@@ -20,17 +33,7 @@ VALUES
 ('Судебный процесс', 'Не активно', '2023-06-22', '2023-11-20'),
 ('Предоставление услуг ООО «Восток»', 'Не активно', '2022-07-01', '2022-09-20');
 
-INSERT INTO payment_policy(policy_type, position, project_id, project_role, special_occasion, status, payment)
-VALUES 
-('По должности', 'Бухгалтер', NULL, NULL, NULL, 'Активно', 30000),
-('По роли в проекте', NULL, 5, 'Связь с клиентом', NULL, 'Активно', 20000),
-('По особому случаю', NULL, NULL, NULL, 'Новый год', 'Активно', 10000),
-('По должности', 'Программист', NULL, NULL, NULL, 'Активно', 40000),
-('По должности', 'Hr-специалист', NULL, NULL, NULL, 'Активно', 40000),
-('По роли в проекте', NULL, 4, 'Адвокат', NULL, 'Активно', 50000),
-('По особому случаю', NULL, NULL, NULL, 'Премия', 'Активно', 15000),
-('По должности', 'Менеджер', NULL, NULL, NULL, 'Активно', 40000),
-('По роли в проекте', NULL, 1, 'Старший программист', NULL, 'Активно', 25000);
+
 
 INSERT INTO assign_to_project(employee_id, project_id, project_role, assign_status, start_date, finish_date)
 VALUES

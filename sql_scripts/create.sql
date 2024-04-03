@@ -7,7 +7,7 @@ CREATE DATABASE employees;
 CREATE SCHEMA data;
 
 CREATE TABLE employee (
-    employee_id SERIAL NOT NULL PRIMARY KEY ON DELETE CASCADE,
+    employee_id SERIAL NOT NULL PRIMARY KEY,
     full_name text NOT NULL,
     position text NOT NULL,
     adress text,
@@ -24,7 +24,7 @@ CREATE TYPE status AS ENUM (
 );
 
 CREATE TABLE project (
-    project_id serial NOT NULL PRIMARY KEY ON DELETE CASCADE,
+    project_id serial NOT NULL PRIMARY KEY,
     project_name text NOT NULL,
     project_status status NOT NULL,
     start_date date NOT NULL,
@@ -37,7 +37,7 @@ CREATE TYPE policy_type AS ENUM (
 );
 
 CREATE TABLE payment_policy(
-    policy_id serial NOT NULL PRIMARY KEY ON DELETE CASCADE,
+    policy_id serial NOT NULL PRIMARY KEY,
     policy_type policy_type NOT NULL,
     position text,
     project_id integer REFERENCES project,
@@ -100,14 +100,17 @@ CREATE FUNCTION check_role() RETURNS trigger AS $check_role$
     END;
 $check_role$ LANGUAGE plpgsql;
 	
-CREATE TRIGGER check_position
-BEFORE INSERT OR UPDATE OF position ON employee
-FOR EACH ROW
-EXECUTE FUNCTION check_position();
+-- CREATE TRIGGER check_position
+-- BEFORE INSERT OR UPDATE OF position ON employee
+-- FOR EACH ROW
+-- EXECUTE FUNCTION check_position();
 
-CREATE TRIGGER check_role
-BEFORE INSERT OR UPDATE OF project_role ON assign_to_project
-FOR EACH ROW
-EXECUTE FUNCTION check_role();
+-- CREATE TRIGGER check_role
+-- BEFORE INSERT OR UPDATE OF project_role ON assign_to_project
+-- FOR EACH ROW
+-- EXECUTE FUNCTION check_role();
+
+-- DROP TRIGGER check_position;
+-- DROP TRIGGER check_role;
 
 ALTER DATABASE employees SET search_path=data;
