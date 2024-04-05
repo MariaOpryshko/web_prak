@@ -34,14 +34,14 @@ CREATE TABLE project (
 );
 
 CREATE TYPE policy_type AS ENUM (
-    'По роли в проекте', 'По должности', 'По особому случаю'
+    'ROLE', 'POSITION', 'SPECIAL_OCCASION'
 );
 
 CREATE TABLE payment_policy(
                                policy_id serial NOT NULL PRIMARY KEY,
                                policy_type policy_type NOT NULL,
                                position text,
-                               project_id integer REFERENCES project,
+                               project_id integer REFERENCES project ON DELETE CASCADE,
                                project_role text,
                                special_occasion text,
                                payment numeric NOT NULL,
@@ -54,8 +54,8 @@ CREATE TABLE payment_policy(
 
 CREATE TABLE assign_payment (
                                 assign_id serial NOT NULL PRIMARY KEY,
-                                employee_id integer NOT NULL REFERENCES employee,
-                                policy_id integer NOT NULL REFERENCES payment_policy,
+                                employee_id integer NOT NULL REFERENCES employee ON DELETE CASCADE,
+                                policy_id integer NOT NULL REFERENCES payment_policy ON DELETE CASCADE,
                                 payment numeric NOT NULL,
                                 payment_date date NOT NULL,
                                 CONSTRAINT positive_payment CHECK(payment > 0)
@@ -63,8 +63,8 @@ CREATE TABLE assign_payment (
 
 CREATE TABLE assign_to_project (
                                    assign_id serial NOT NULL PRIMARY KEY,
-                                   employee_id integer NOT NULL REFERENCES employee,
-                                   project_id integer NOT NULL REFERENCES project,
+                                   employee_id integer NOT NULL REFERENCES employee ON DELETE CASCADE,
+                                   project_id integer NOT NULL REFERENCES project ON DELETE CASCADE,
                                    project_role text NOT NULL,
                                    assign_status status NOT NULL,
                                    start_date date NOT NULL,

@@ -9,15 +9,15 @@ VALUES
 
 INSERT INTO payment_policy(policy_type, position, project_id, project_role, special_occasion, status, payment)
 VALUES
-('По должности', 'Бухгалтер', NULL, NULL, NULL, 'ACTIVE', 30000),
-('По роли в проекте', NULL, 5, 'Связь с клиентом', NULL, 'ACTIVE', 20000),
-('По особому случаю', NULL, NULL, NULL, 'Новый год', 'ACTIVE', 10000),
-('По должности', 'Программист', NULL, NULL, NULL, 'ACTIVE', 40000),
-('По должности', 'Hr-специалист', NULL, NULL, NULL, 'ACTIVE', 40000),
-('По роли в проекте', NULL, 4, 'Адвокат', NULL, 'ACTIVE', 50000),
-('По особому случаю', NULL, NULL, NULL, 'Премия', 'ACTIVE', 15000),
-('По должности', 'Менеджер', NULL, NULL, NULL, 'ACTIVE', 40000),
-('По роли в проекте', NULL, 1, 'Старший программист', NULL, 'ACTIVE', 25000);
+('POSITION', 'Бухгалтер', NULL, NULL, NULL, 'ACTIVE', 30000),
+('ROLE', NULL, 5, 'Связь с клиентом', NULL, 'ACTIVE', 20000),
+('SPECIAL_OCCASION', NULL, NULL, NULL, 'Новый год', 'ACTIVE', 10000),
+('POSITION', 'Программист', NULL, NULL, NULL, 'ACTIVE', 40000),
+('POSITION', 'Hr-специалист', NULL, NULL, NULL, 'ACTIVE', 40000),
+('ROLE', NULL, 4, 'Адвокат', NULL, 'ACTIVE', 50000),
+('SPECIAL_OCCASION', NULL, NULL, NULL, 'Премия', 'ACTIVE', 15000),
+('POSITION', 'Менеджер', NULL, NULL, NULL, 'ACTIVE', 40000),
+('ROLE', NULL, 1, 'Старший программист', NULL, 'ACTIVE', 25000);
 
 INSERT INTO employee(full_name, position, adress, date_of_birth, education, education_degree, phone_number, work_experience)
 VALUES

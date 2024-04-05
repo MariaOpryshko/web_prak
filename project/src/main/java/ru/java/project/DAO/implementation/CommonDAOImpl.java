@@ -47,9 +47,10 @@ public abstract class CommonDAOImpl<T extends Template<ID>, ID extends Serializa
     @Override
     public void save(T entity) {
         try (Session session = sessionFactory.openSession()) {
-            if (entity.getId() != null) {
-                entity.setId(null);
-            }
+//            if (entity.getId() != null) {
+//                entity.setId(null);
+//            }
+            entity.setId(null);
             session.beginTransaction();
             session.saveOrUpdate(entity);
             session.getTransaction().commit();

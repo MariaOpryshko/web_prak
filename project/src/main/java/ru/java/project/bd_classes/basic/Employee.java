@@ -16,7 +16,6 @@ public class Employee implements Template<Long> {
 
 	@Id
 	@Column(name = "employee_id")
-	@NonNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

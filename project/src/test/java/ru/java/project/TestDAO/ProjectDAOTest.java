@@ -6,31 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import ru.java.project.DAO.interfaces.AssignToProjectDAO;
-import ru.java.project.bd_classes.EmployeesOnProject;
-import ru.java.project.bd_classes.PaymentHistory;
-import ru.java.project.bd_classes.ProjectsOfEmployee;
+import ru.java.project.DAO.interfaces.ProjectDAO;
+import ru.java.project.bd_classes.basic.Employee;
+import ru.java.project.bd_classes.basic.Project;
+import java.sql.Date;
+
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static ru.java.project.bd_classes.basic.Project.Status.NON_ACTIVE;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestPropertySource(locations="classpath:application.properties")
-public class AssignToProjectDAOTest {
+public class ProjectDAOTest {
     @Autowired
-    private AssignToProjectDAO assignToProjectDAO;
+    private ProjectDAO projectDAO;
 
+//    public List<Project> getProjectsByName(String name)
     @Test
-    void TestGetEmployeesByProject() {
-        List<EmployeesOnProject> ans = assignToProjectDAO.getEmployeesByProject(1L);
+    void TestGetProjectsByName() {
+        List<Project> ans = projectDAO.getProjectsByName("Создание");
         assertNotNull(ans);
     }
 
-    @Test
-    void TestGetHistoryRolesAndProjects() {
-        List<ProjectsOfEmployee> ans = assignToProjectDAO.getHistoryRolesAndProjects(1L);
-        assertNotNull(ans);
-    }
 
 
 }

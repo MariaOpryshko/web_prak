@@ -29,7 +29,7 @@ public class AssignPaymentDAOImpl extends CommonDAOImpl<AssignPayment, Long> imp
 
         for (AssignPayment assignPaymentRaw : getAll()) {
             if (assignPaymentRaw.getEmployee_id().equals(employeeId)
-                && !paymentPolicyDAO.getById(assignPaymentRaw.getPolicy_id()).getPosition().isEmpty()) {
+                && !(paymentPolicyDAO.getById(assignPaymentRaw.getPolicy_id()).getPosition()==null)) {
 
                 PositionHistory tmp = new PositionHistory();
                 tmp.setPosition(paymentPolicyDAO.getById(assignPaymentRaw.getPolicy_id()).getPosition());

@@ -11,6 +11,7 @@ import java.sql.Date;
 @Setter
 @ToString
 @NoArgsConstructor(force = true)
+@AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "project")
 public class Project implements Template<Long> {
@@ -25,7 +26,6 @@ public class Project implements Template<Long> {
 
     @Id
     @Column(name = "project_id", nullable = false)
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -44,4 +44,5 @@ public class Project implements Template<Long> {
 
     @Column(name = "finish_date")
     private Date finish_date;
+
 }
