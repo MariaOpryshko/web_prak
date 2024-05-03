@@ -16,18 +16,8 @@ import java.sql.Date;
 @Table(name = "assign_to_project")
 public class AssignToProject implements Template<Long> {
 
-    @Getter
-    public enum Status {
-        ACTIVE("Активно"),
-        NON_ACTIVE("Не активно");
-        private final String stat;
-        private String active;
-        Status (String s) { this.stat = s; }
-    }
-
     @Id
     @Column(name = "assignn_id", nullable = false)
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -45,8 +35,7 @@ public class AssignToProject implements Template<Long> {
 
     @Column(name = "assign_status", nullable = false)
     @NonNull
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
 
     @Column(name = "start_date", nullable = false)
     @NonNull

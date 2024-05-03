@@ -52,6 +52,7 @@ public class AssignToProjectDAOImpl extends CommonDAOImpl<AssignToProject, Long>
             if (assignToProject.getEmployee_id().equals(employeeID)) {
                 ProjectsOfEmployee tmp = new ProjectsOfEmployee();
                 tmp.setId(assignToProject.getProject_id());
+                tmp.setProject_id(assignToProject.getProject_id());
                 tmp.setProject_name(projectDAO.getById(assignToProject.getProject_id()).getProject_name());
                 tmp.setProject_role(assignToProject.getProject_role());
                 tmp.setStatus(assignToProject.getStatus());
@@ -63,5 +64,21 @@ public class AssignToProjectDAOImpl extends CommonDAOImpl<AssignToProject, Long>
         }
         return ans.isEmpty() ? null : ans;
 
+    }
+
+    @Override
+    public List<ProjectsOfEmployee> getActualProjectByEmployee(Long employeeID){
+        List<ProjectsOfEmployee> employee_projects = getHistoryRolesAndProjects(employeeID);
+        List<ProjectsOfEmployee> ans = new ArrayList<>();
+        if (employee_projects == null || employee_projects.isEmpty()) {
+            return null;
+        }
+        for (ProjectsOfEmployee project : employee_projects) {
+            if (project.getStatus().equals("ACTIVE")) {
+                ans.add(project);
+            }
+        }
+
+        return ans;
     }
 }

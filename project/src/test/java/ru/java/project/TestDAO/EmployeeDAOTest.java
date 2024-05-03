@@ -5,11 +5,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-import ru.java.project.DAO.interfaces.AssignToProjectDAO;
 import ru.java.project.DAO.interfaces.EmployeeDAO;
-import ru.java.project.bd_classes.basic.AssignToProject;
 import ru.java.project.bd_classes.basic.Employee;
-import ru.java.project.bd_classes.basic.Project;
+
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.java.project.bd_classes.basic.Project.Status.NON_ACTIVE;
 
 
 @SpringBootTest

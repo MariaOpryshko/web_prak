@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История выплат</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="/path/to/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" th:href="@{'/employee-personal-page/' + ${employee.id}}">Вернуться</a>
+        </div>
+        <div class="col-md-5 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+            <h2>История выплат</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID назначения выплаты</th>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Сумма</th>
+                    <th scope="col">Тип политики</th>
+
+
+
+
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr th:each="payment : ${payments}">
+                    <td><a th:href="@{'/list_of_payment_policies'}" th:text="${payment.getPolicy_id()}"></a></td>
+                    <td th:text="${payment.getPaymet_date()}"></td>
+                    <td th:text="${payment.getPayment()}"></td>
+                    <td th:text="${payment.getPolicy_type()}"></td>
+
+
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

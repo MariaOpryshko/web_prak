@@ -12,34 +12,14 @@ import jakarta.persistence.*;
 @RequiredArgsConstructor
 @Table(name = "payment_policy")
 public class PaymentPolicy implements Template<Long> {
-    @Getter
-    public enum PolicyType {
-        POSITION("По должности") ,
-        ROLE("По роли в проекте") ,
-        SPECIAL_OCCASION("По особому случаю");
-        private String type;
-        PolicyType (String s) { this.type = s; }
-    }
-
-    @Getter
-    public enum Status {
-        ACTIVE("Активно"),
-        NON_ACTIVE("Не активно");
-        private String stat;
-        Status (String s) { this.stat = s; }
-    }
-
-
     @Id
     @Column(name = "policy_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private Long id;
 
     @Column(name = "policy_type", nullable = false)
     @NonNull
-    @Enumerated(EnumType.STRING)
-    private PolicyType policy_type;
+    private String policy_type;
 
     @Column(name = "position")
     private String position;
@@ -59,6 +39,5 @@ public class PaymentPolicy implements Template<Long> {
 
     @Column(name = "status", nullable = false)
     @NonNull
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
 }

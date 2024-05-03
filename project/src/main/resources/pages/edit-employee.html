@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование данных сотрудника</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" th:href="@{'/employee-personal-page/' + ${employee.getId()}}">Вернуться</a>
+        </div>
+        <div class="col-md-5 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+
+            <h2 th:text="${employee.getFull_name()}"></h2>
+            <div th:if="${error_msg}" class="alert alert-danger">
+                <p th:text="${error_msg}"></p>
+            </div>
+            <form th:action="@{/update-employee/{id}(id=${employee.getId()})}" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Информация о сотруднике</h5>
+                        <p class="card-text">Личный номер: <span th:text="${employee.getId()}"></span></p>
+                        <p class="card-text">ФИО: <input type="text" th:value="${employee.getFull_name()}" name="full_name"></p>
+                        <p class="card-text">Должность: <select class="form-control" id="position" name="position">
+                                                            <option th:each="policy : ${all_position_policies}" th:value="${policy.getPosition()}" th:text="${policy.getPosition()}">Должность</option>
+                                                        </select></p>
+                        <p class="card-text">Проекты и роли:<span  th:each="project_ : ${projects}" th:text="${project_.getProject_name()} + ' &boxh; ' + ${project_.getProject_role()} + ' ;'"></span><br/></p>
+                        <p class="card-text">Адрес: <input type="text" th:value="${employee.getAddress_()}" name="address"></p>
+                        <p class="card-text">Дата рождения: <input type="date" th:value="${employee.getDate_of_birth()}" name="date_of_birth"></p>
+                        <p class="card-text">Образование: <input type="text" th:value="${employee.getEducation()}" name="education"></p>
+                        <p class="card-text">Степень образования: <input type="text" th:value="${employee.getEducation_degree()}" name="education_degree"></p>
+                        <p class="card-text">Номер телефона: <input type="number" th:value="${employee.getPhone_number()}" name="phone"></p>
+                        <p class="card-text">Стаж работы: <input type="number" th:value="${employee.getWork_experience()}" name="work_exp"></p>
+                    </div>
+                </div>
+                <div class="col-md-8 offset-md-2">&nbsp;</div>
+                <button class="btn btn-info btn-sm" type="submit">Подтвердить</button>
+            </form>
+            <form th:action="@{'/delete-employee/' + ${employee.getId()}}" method="post">
+                <button type="submit" class="btn btn-danger btn-sm">Уволить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

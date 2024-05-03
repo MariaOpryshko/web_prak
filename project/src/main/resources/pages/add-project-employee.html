@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление нового участника проекта</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"></div>
+
+<div class="container mt-5">
+    <div class="row mt-3">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" th:href="@{'/project-personal-page/' + ${projectId}}">Вернуться</a>
+        </div>
+        <div class="col-md-5 offset-md-2">&nbsp;</div>
+        <div class="col-md-12">
+            <h2>Добавление нового участника проекта</h2>
+            <form th:action="@{'/add-project-employee/' + ${projectId}}" method="post">
+                <div class="form-group">
+                    <label for="employeeId">Выберите нового сотрудника:</label>
+                    <select class="form-control" id="employeeId" name="employeeId">
+
+                        <block th:each="employee : ${employees}">
+                            <option name="employee_id" th:value="${employee.getId()}" th:text="${employee.getFull_name()}"></option>
+                        </block>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

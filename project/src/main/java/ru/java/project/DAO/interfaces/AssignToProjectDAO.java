@@ -10,6 +10,7 @@ public interface AssignToProjectDAO extends CommonDAO<AssignToProject, Long>{
 
     public List<EmployeesOnProject> getEmployeesByProject(Long projectId);
 
+    public List<ProjectsOfEmployee> getActualProjectByEmployee(Long employeeID);
 
     public List<ProjectsOfEmployee> getHistoryRolesAndProjects (Long employeeID);
 

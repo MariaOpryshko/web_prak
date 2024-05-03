@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить нового сотрудника</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" href="/list_of_employees">Вернуться</a>
+        </div>
+        <div class="col-md-8 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+            <h2>Добавить нового сотрудника</h2>
+            <div th:if="${error_msg}" class="alert alert-danger">
+                <p th:text="${error_msg}"></p>
+            </div>
+            <form action="/add-employee" method="post">
+                <div class="form-group">
+                    <label for="name">ФИО*:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="position">Должность*:</label>
+                    <select class="form-control" id="position" name="position"  >
+                        <option th:each="policy : ${all_position_policies}" th:value="${policy.getPosition()}" th:text="${policy.getPosition()}">Должность</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="address">Адрес:</label>
+                    <input type="text" class="form-control" id="address" name="address">
+                </div>
+                <div class="form-group">
+                    <label for="dateOfBirth">Дата рождения*:</label>
+                    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                </div>
+                <div class="form-group">
+                    <label for="education">Образование (учебное заведение и направление):</label>
+                    <input type="text" class="form-control" id="education" name="education">
+                </div>
+                <div class="form-group">
+                    <label for="educationDegree">Уровень образования (бакалавр, магистр и т.д.):</label>
+                    <input type="text" class="form-control" id="educationDegree" name="educationDegree">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефонный номер (в формате 8**********)*:</label>
+                    <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="workExp">Стаж работы*:</label>
+                    <input type="number" class="form-control" id="workExp" name="workExp">
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

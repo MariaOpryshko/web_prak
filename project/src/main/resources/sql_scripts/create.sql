@@ -3,8 +3,6 @@ DROP TABLE IF EXISTS assign_payment;
 DROP TABLE IF EXISTS payment_policy;
 DROP TABLE IF EXISTS project;
 DROP TABLE IF EXISTS employee;
-DROP TYPE IF EXISTS status;
-DROP TYPE IF EXISTS policy_type;
 
 
 CREATE TABLE employee (
@@ -20,32 +18,26 @@ CREATE TABLE employee (
                           CONSTRAINT correct_work_experience CHECK (work_experience >= 0 AND work_experience <= 100)
 );
 
-CREATE TYPE status AS ENUM (
-    'ACTIVE', 'NON_ACTIVE'
-);
 
 CREATE TABLE project (
                          project_id serial NOT NULL PRIMARY KEY,
                          project_name text NOT NULL,
-                         project_status status NOT NULL,
+                         project_status text NOT NULL,
                          start_date date NOT NULL,
                          finish_date date,
                          CONSTRAINT finish_after_start CHECK (finish_date IS NULL OR finish_date >= start_date)
 );
 
-CREATE TYPE policy_type AS ENUM (
-    'ROLE', 'POSITION', 'SPECIAL_OCCASION'
-);
 
 CREATE TABLE payment_policy(
                                policy_id serial NOT NULL PRIMARY KEY,
-                               policy_type policy_type NOT NULL,
+                               policy_type text NOT NULL,
                                position text,
-                               project_id integer REFERENCES project ON DELETE CASCADE,
+                               project_id integer,
                                project_role text,
                                special_occasion text,
                                payment numeric NOT NULL,
-                               status status NOT NULL,
+                               status text NOT NULL,
                                CONSTRAINT positive_payment CHECK(payment > 0),
                                CONSTRAINT correct_policy CHECK ((position is not NULL and project_id is NULL and project_role is NULL and special_occasion is NULL) or
                                                                 (project_id is not NULL and position is NULL and special_occasion is NULL) or
@@ -66,7 +58,7 @@ CREATE TABLE assign_to_project (
                                    employee_id integer NOT NULL REFERENCES employee ON DELETE CASCADE,
                                    project_id integer NOT NULL REFERENCES project ON DELETE CASCADE,
                                    project_role text NOT NULL,
-                                   assign_status status NOT NULL,
+                                   assign_status text NOT NULL,
                                    start_date date NOT NULL,
                                    finish_date date,
                                    CONSTRAINT finish_after_start CHECK (finish_date IS NULL OR finish_date >= start_date)

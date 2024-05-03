@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История проектов сотрудника</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" th:href="@{'/employee-personal-page/' + ${employee.id}}">Вернуться</a>
+
+        </div>
+        <div class="col-md-5 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+            <h2>История проектов сотрудника</h2>
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Проект</th>
+                    <th scope="col">Роль</th>
+                    <th scope="col">Дата начала</th>
+                    <th scope="col">Дата окончания</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr th:each="project : ${projects}">
+                    <td><a th:href="@{/project-personal-page/${project.getProject_id()}}" th:text="${project.getProject_name()}">Проект</a></td>
+                    <td th:text="${project.getProject_role()}">Роль</td>
+                    <td th:text="${project.getStart_date()}">Дата начала</td>
+                    <td th:text="${project.getFinish_date()}">Дата окончания</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

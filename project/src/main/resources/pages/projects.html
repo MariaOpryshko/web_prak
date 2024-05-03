@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список проектов</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"></div>
+
+<div class="container mt-5">
+    <h2>Список проектов</h2>
+    <div th:if="${error_msg}" class="alert alert-danger">
+        <p th:text="${error_msg}"></p>
+    </div>
+    <div th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
+    </div>
+    <a class="btn btn-primary mb-3" href="/add-project">Добавить проект</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID проекта</th>
+            <th scope="col">Название проекта</th>
+            <th scope="col">Дата начала</th>
+            <th scope="col">Дата окончания</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr th:each="project : ${projects}">
+            <td> <a th:href="@{'/project-personal-page/' + ${project.getId()}}" th:text="${project.getId()}"></a></td>
+            <td> <a th:href="@{'/project-personal-page/' + ${project.getId()}}" th:text="${project.getProject_name()}"></a></td>
+            <td th:text="${project.getStart_date()}"></td>
+            <td th:text="${project.getFinish_date()}"></td>
+            
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

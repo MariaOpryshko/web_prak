@@ -15,7 +15,6 @@ import java.sql.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.java.project.bd_classes.basic.Project.Status.NON_ACTIVE;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

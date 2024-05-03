@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.java.project.bd_classes.basic.PaymentPolicy;
+import ru.java.project.bd_classes.basic.Template;
 
 import java.sql.Date;
 
@@ -15,7 +15,7 @@ import java.sql.Date;
 public class PaymentHistory {
     private Long policy_id;
 
-    private PaymentPolicy.PolicyType policy_type;
+    private String policy_type;
 
     private Double payment;
 

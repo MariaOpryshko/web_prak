@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование политики выплат</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+    <div class="col-md-5 offset-md-1">
+        <a href="/list_of_payment_policies" class="btn btn-secondary mt-3">Вернуться</a>
+    </div>
+    <div class="col-md-5 offset-md-2">&nbsp;</div>
+    <div class="col-md-8 offset-md-2">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Редактирование политики выплат</h2>
+            
+            <form th:action="@{/edit-policy/{id}(id=${policy.getId()})}" method="post">
+                
+                <div class="form-group">
+                    <label>ID политики:</label>
+                    <input type="text" class="form-control" th:value="${policy.getId()}" name="id" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Тип политики:</label>
+                    <input type="text" class="form-control" th:value="${policy.getPolicy_type()}" name="type" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment">Сумма выплат:</label>
+                    <input type="text" class="form-control" id="payment" th:value="${policy.getPayment()}" name="payment">
+                </div>
+                <div class="form-group">
+                    <label for="policyStatus">Статус поолитики:</label>
+                    <select id="policyStatus" name="policyStatus" class="form-control" onchange="showFields()">
+                        <option th:value="${policy.getStatus()}" th:text="${policy.getStatus()}"></option>
+                        <option value="NON_ACTIVE" th:if="${policy.getStatus().equals('ACTIVE')}">NON_ACTIVE</option>
+                        <option value="ACTIVE" th:if="${policy.getStatus().equals('NON_ACTIVE')}">ACTIVE</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+
+            </form>
+            <form th:action="@{'/delete-policy/' + ${policy.getId()}}" method="post">
+                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+            </form>
+            
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

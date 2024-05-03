@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:fragment="page-header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+        <div class="container">
+            <a class="navbar-brand text-white" href="/">Главная</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/list_of_employees">Сотрудники</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/list_of_payment_policies">Политики выплат</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/list_of_projects">Проекты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Выбор списка</h2>
+            <ul class="list-group mt-3">
+                
+                <li class="list-group-item">
+                    <a th:href="@{/list_of_projects}">Список всех проектов</a>
+                </li>
+                <li class="list-group-item">
+                    <a th:href="@{/list_of_employees}">Список сотрудников</a>
+                </li>
+                <li class="list-group-item">
+                    <a th:href="@{/list_of_payment_policies}">Список политик выплат</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

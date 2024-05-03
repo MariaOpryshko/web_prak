@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список сотрудников</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Список сотрудников</h2>
+            
+            <div th:if="${error_msg}" class="alert alert-danger">
+                <p th:text="${error_msg}"></p>
+            </div>
+            <div th:if="${message}" class="alert alert-success">
+                <p th:text="${message}"></p>
+            </div>
+            <a class="btn btn-primary mb-3" href="/add-employee">Добавить сотрудника</a>
+
+            
+            <form action="/filtered_list_of_employees" method="get" class="mb-3">
+                <div class="form-group">
+                    <label for="position">Фильтр по должности:</label>
+                    <select class="form-control" id="position" name="position"  >
+                        <option value="">Все должности</option>
+                        <option th:each="policy : ${all_position_policies}" th:value="${policy.getPosition()}" th:text="${policy.getPosition()}">Должность</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Применить</button>
+            </form>
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Личный номер</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Должность</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${all_employees}">
+                    <td><a th:href="@{'/employee-personal-page/' + ${employee.getId()}}" th:text="${employee.getId()}"></a></td>
+                    <td><a th:href="@{'/employee-personal-page/' + ${employee.getId()}}" th:text="${employee.getFull_name()}"></a></td>
+                    <td th:text="${employee.getPosition()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

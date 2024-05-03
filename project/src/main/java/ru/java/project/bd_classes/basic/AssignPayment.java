@@ -16,7 +16,6 @@ public class AssignPayment implements Template<Long> {
 
     @Id
     @Column(name = "assign_id")
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

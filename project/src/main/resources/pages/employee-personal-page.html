@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личная страница сотрудника</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" href="/list_of_employees">Вернуться</a>
+        </div>
+        <div class="col-md-8 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+
+            <h2 th:text="${employee.getFull_name()}"></h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Информация о сотруднике</h5>
+                    <p class="card-text">Личный номер: <span th:text="${employee.getId()}"></span></p>
+                    <p class="card-text">ФИО: <span th:text="${employee.getFull_name()}"></span></p>
+                    <p class="card-text">Должность: <span th:text="${employee.getPosition()}"></span></p>
+                    <p class="card-text">Проекты и роли:<span  th:each="project_ : ${projects}"><a th:href="@{'/project-personal-page/' + ${project_.getProject_id()}}" th:text="${project_.getProject_name()} + ' &boxh; ' + ${project_.getProject_role()} + ' ;'"></a><br/></span></p>
+                    <p class="card-text">Адрес: <span th:text="${employee.getAddress_()}"></span></p>
+                    <p class="card-text">Дата рождения: <span th:text="${employee.getDate_of_birth()}"></span></p>
+                    <p class="card-text">Образование: <span th:text="${employee.getEducation()}"></span></p>
+                    <p class="card-text">Степень образования: <span th:text="${employee.getEducation_degree()}"></span>
+                    </p>
+                    <p class="card-text">Номер телефона: <span th:text="${employee.getPhone_number()}"></span></p>
+                    <p class="card-text">Стаж работы: <span th:text="${employee.getWork_experience()}"></span></p>
+                    <p class="card-text"><a th:href="@{'/project-history/' + ${employee.getId()}}">История проектов и ролей</a></p>
+                    <p class="card-text"><a th:href="@{'/position-history/' + ${employee.getId()}}">История должностей</a></p>
+                    <p class="card-text"><a th:href="@{'/payment-history/' + ${employee.getId()}}">История выплат</a></p>
+                    
+                </div>
+            </div>
+            <div class="col-md-8 offset-md-2">&nbsp;</div>
+            <a class="btn btn-info btn-sm" th:href="@{'/edit-employee/' + ${employee.getId()}}">Редактировать</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@ import lombok.*;
 
 import java.sql.Date;
 
-import ru.java.project.bd_classes.basic.AssignToProject.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.java.project.bd_classes.basic.Template;
 
 @Getter
@@ -19,9 +19,10 @@ public class EmployeesOnProject implements Template<Long> {
 
     private String project_role;
 
-    private Status status;
+    private String status;
 
     private Date start_date;
 
     private Date finish_date;
+
 }

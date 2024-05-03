@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить новую политику выплат</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" href="/list_of_payment_policies">Вернуться</a>
+        </div>
+        <div class="col-md-5 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+            <h2>Добавить новую политику выплат</h2>
+            <form id="addPolicyForm" action="/add-policy" method="post">
+                <div class="form-group">
+                    <label for="policyType">Тип политики:</label>
+                    <select id="policyType" name="policyType" class="form-control" onchange="showFields()">
+                        <option value="">Выберите тип политики</option>
+                        <option value="ROLE">По роли в проекте</option>
+                        <option value="POSITION">По должности</option>
+                        <option value="SPECIAL_CASE">По особому случаю</option>
+                    </select>
+                </div>
+                <div class="form-group" id="positionField" style="display: none;">
+                    <label for="position">Должность:</label>
+                    <input type="text" id="position" name="position" class="form-control">
+                </div>
+                <div class="form-group" id="projectField" style="display: none;">
+                    <label for="projectId">Номер проекта:</label>
+                    <input type="text" id="projectId" name="projectId" class="form-control">
+                </div>
+                <div class="form-group" id="roleField" style="display: none;">
+                    <label for="projectRole">Роль в проекте:</label>
+                    <input type="text" id="projectRole" name="projectRole" class="form-control">
+                </div>
+                <div class="form-group" id="specialOccasionField" style="display: none;">
+                    <label for="specialOccasion">Особое событие:</label>
+                    <input type="text" id="specialOccasion" name="specialOccasion" class="form-control">
+                </div>
+                <div class="form-group" id="amountField" style="display: none;">
+                    <label for="amount">Сумма выплат:</label>
+                    <input type="text" id="amount" name="amount" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+                <a class="btn btn-secondary" href="/list_of_payment_policies">Вернуться</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function showFields() {
+        var policyType = document.getElementById("policyType").value;
+        var positionField = document.getElementById("positionField");
+        var projectField = document.getElementById("projectField");
+        var roleField = document.getElementById("roleField");
+        var specialOccasionField = document.getElementById("specialOccasionField");
+        var amountField = document.getElementById("amountField");
+
+        if (policyType === "ROLE") {
+            positionField.style.display = "none";
+            projectField.style.display = "block";
+            roleField.style.display = "block";
+            specialOccasionField.style.display = "none";
+            amountField.style.display = "block";
+        } else if (policyType === "POSITION") {
+            positionField.style.display = "block";
+            projectField.style.display = "none";
+            roleField.style.display = "none";
+            specialOccasionField.style.display = "none";
+            amountField.style.display = "block";
+        } else if (policyType === "SPECIAL_CASE") {
+            positionField.style.display = "none";
+            projectField.style.display = "none";
+            roleField.style.display = "none";
+            specialOccasionField.style.display = "block";
+            amountField.style.display = "block";
+        } else {
+            positionField.style.display = "none";
+            projectField.style.display = "none";
+            roleField.style.display = "none";
+            specialOccasionField.style.display = "none";
+            amountField.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

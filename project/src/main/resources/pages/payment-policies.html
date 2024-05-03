@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список политик выплат</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!--<body style="background: #bbf0c8;">-->
+<div th:replace="open :: page-header"> </div>
+
+<!--<div class="navbar navbar-expand-lg navbar-dark bg-success">-->
+<!--    <a href="https://www.youtube.com/watch?v=0tOXxuLcaog">-->
+<!--        <img style="width: 5em; height: 5em; display:inline"-->
+<!--             src="https://sun1-16.userapi.com/s/v1/if1/xlDEw_Y9-xWaAajO8us0HUoY7e1HrKWI45-7jkfBqfnq5DLFxDyv_XQNf3BVG9F6JW4hcGkA.jpg?size=200x200&quality=96&crop=0,160,959,959&ava=1">-->
+<!--    </a>-->
+<!--    <a href="https://i.ytimg.com/vi/kaFH9Ic3jMk/maxresdefault.jpg" style="margin:auto; -webkit-text-stroke:medium; text-align: center; color: white; font-size: 3em; text-decoration: blink;">-->
+<!--    <span >-->
+<!--        САЙТ ДОБРЫХ ЛЮДЕЙ-->
+<!--    </span>-->
+<!--    </a>-->
+<!--</div>-->
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Список политик выплат</h2>
+            
+            <a class="btn btn-primary mb-3" th:href="@{'/add-policy'}">Добавить</a>
+            <div th:if="${error_msg}" class="alert alert-danger">
+                <p th:text="${error_msg}"></p>
+            </div>
+            <div th:if="${message}" class="alert alert-success">
+                <p th:text="${message}"></p>
+            </div>
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Номер политики</th>
+                    <th scope="col">Тип политики</th>
+                    <th scope="col">Должность</th>
+                    <th scope="col">Номер проекта</th>
+                    <th scope="col">Роль в проекте</th>
+                    <th scope="col">Особое событие</th>
+                    <th scope="col">Сумма выплат</th>
+                    <th scope="col">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr th:each="policy : ${all_payment_policies}">
+                    <td th:text="${policy.getId()}">Номер политики
+                    </td>
+                    <td th:text="${policy.getPolicy_type()}">Тип политики
+                    </td>
+                    <td th:text="${policy.getPosition()}">Должность
+                    </td>
+                    <td th:text="${policy.getProject_id()}">Номер проекта
+                    </td>
+                    <td th:text="${policy.getProject_role()}">Роль в проекте
+                    </td>
+                    <td th:text="${policy.getSpecial_occasion()}">Особое событие
+                    </td>
+                    <td th:text="${policy.getPayment()}">Сумма выплат
+                    </td>
+                    <td>
+                        
+                        <a class="btn btn-info btn-sm" th:href="@{'/edit-policy/' + ${policy.getId()}}">Редактировать</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

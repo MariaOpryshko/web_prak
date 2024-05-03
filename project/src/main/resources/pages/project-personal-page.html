@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личная страница сотрудника</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" href="/list_of_projects">Вернуться</a>
+        </div>
+        <div class="col-md-8 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+
+            <h2 th:text="${project.getProject_name()}"></h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Информация о проекте</h5>
+                    <p class="card-text">Личный номер: <span th:text="${project.getId()}"></span></p>
+                    <p class="card-text">Название: <span th:text="${project.getProject_name()}"></span></p>
+                    <p class="card-text">Статус: <span th:text="${project.getStatus()}"></span></p>
+                    <p class="card-text">Дата начала: <span th:text="${project.getStart_date()}"></span></p>
+                    <p class="card-text">Дата завершения: <span th:text="${project.getFinish_date()}"></span></p>
+                </div>
+            </div>
+            <h2>Участники проекта</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID сотрудника</th>
+                    <th scope="col">ФИО</th>
+                    <th scope="col">Роль</th>
+                    <th scope="col">Статус назначения</th>
+                    <th scope="col">Дата начала работы</th>
+                    <th scope="col">Дата завершения работы</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr th:each="employee : ${employees}">
+                    <td> <a th:href="@{'/employee-personal-page/' + ${employee.getId()}}" th:text="${employee.getId()}"></a></td>
+                    <td> <a th:href="@{'/employee-personal-page/' + ${employee.getId()}}" th:text="${employee.getFull_name()}"></a></td>
+                    <td th:text="${employee.getProject_role()}"></td>
+                    <td th:text="${employee.getStatus()}"></td>
+                    <td th:text="${employee.getStart_date()}"></td>
+                    <td th:text="${employee.getFinish_date()}"></td>
+                    
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-md-8 offset-md-2">&nbsp;</div>
+            <a class="btn btn-primary" th:href="@{'/add-project-employee/' + ${project.getId()}}">Добавить участника</a>
+            <div class="col-md-8 offset-md-2">&nbsp;</div>
+            <a class="btn btn-info btn-sm" th:href="@{'/edit-project/' + ${project.getId()}}">Редактировать</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование данных сотрудника</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="open :: page-header"> </div>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <a class="btn btn-secondary" th:href="@{'/project-personal-page/' + ${project.getId()}}">Вернуться</a>
+        </div>
+        <div class="col-md-5 offset-md-2">&nbsp;</div>
+        <div class="col-md-8 offset-md-2">
+
+            <h2 th:text="${project.getProject_name()}"></h2>
+            <div th:if="${error_msg}" class="alert alert-danger">
+                <p th:text="${error_msg}"></p>
+            </div>
+            <form th:action="@{/update-project/{id}(id=${project.getId()})}" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Информация о проекте</h5>
+                        <p class="card-text">Личный номер: <span th:text="${project.getId()}"></span></p>
+                        <p class="card-text">Название: <input type="text" name="name" th:value="${project.getProject_name()}"></p>
+                        <p class="card-text">Статус: <select id="status" name="status" class="form-control" onchange="showFields()">
+                            <option th:value="${project.getStatus()}" th:text="${project.getStatus()}"></option>
+                            <option value="NON_ACTIVE" th:if="${project.getStatus().equals('ACTIVE')}">NON_ACTIVE</option>
+                            <option value="ACTIVE" th:if="${project.getStatus().equals('NON_ACTIVE')}">ACTIVE</option>
+                        </select></p>
+                        <p class="card-text">Дата начала: <span th:text="${project.getStart_date()}"></span></p>
+                        <p class="card-text">Дата завершения: <input type="date" name="finish_date" th:value="${project.getFinish_date()}"></p>
+                    </div>
+                </div>
+                <div class="col-md-8 offset-md-2">&nbsp;</div>
+                <button class="btn btn-info btn-sm" type="submit">Подтвердить</button>
+            </form>
+            <form th:action="@{'/delete-project/' + ${project.getId()}}" method="post">
+                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

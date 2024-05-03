@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.sql.Date;
 
-import ru.java.project.bd_classes.basic.AssignToProject;
 
 @Getter
 @Setter
@@ -14,11 +13,13 @@ public class ProjectsOfEmployee {
 
     private Long id;
 
+    private Long project_id;
+
     private String project_name;
 
     private String project_role;
 
-    private AssignToProject.Status status;
+    private String status;
 
     private Date start_date;
 
