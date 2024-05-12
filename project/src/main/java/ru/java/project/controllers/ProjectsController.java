@@ -153,4 +153,18 @@ public class ProjectsController {
 
         return "redirect:/project-personal-page/" + project_id.toString();
     }
+    @PostMapping("/delete-project/{id}")
+    public String deleteProject(@PathVariable("id") Long id,
+                               RedirectAttributes redirectAttributes) {
+        Project project = projectDAO.getById(id);
+
+        if (project == null) {
+            redirectAttributes.addFlashAttribute("error_msg", "Unable to delete project with ID = " + id);
+        } else {
+            projectDAO.delete(project);
+            redirectAttributes.addFlashAttribute("message", "Deleted successfully!");
+        }
+
+        return "redirect:/list_of_projects";
+    }
 }
